@@ -1,5 +1,4 @@
-import { animate, stagger } from 'https://esm.sh/animejs@4.1.2';
-import * as THREE from 'https://esm.sh/three';
+const { animate, stagger } = anime;
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.getElementById('year').textContent = new Date().getFullYear();
