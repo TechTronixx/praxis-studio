@@ -225,6 +225,45 @@ footer{position:relative;z-index:1}
 .parallax-sec .p-vid{position:absolute;inset:0;z-index:0;opacity:.06;filter:grayscale(1)}
 .parallax-sec .p-vid video{width:100%;height:100%;object-fit:cover;display:block}
 [data-theme="light"] .parallax-sec .p-vid{opacity:.04}
+/* scrollytelling */
+.scrolly{position:relative;border-top:1px solid var(--line)}
+.scrolly-bar{position:absolute;left:0;top:0;width:2px;height:0;background:var(--fg);z-index:2;transition:height .1s linear}
+.scrolly-steps{position:relative;max-width:1120px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.scrolly-visual{position:sticky;top:96px;height:420px;display:flex;align-items:center;justify-content:center}
+.scrolly-visual img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);border:1px solid var(--line);transition:opacity .4s ease;position:absolute;inset:0;opacity:0}
+.scrolly-visual img.active{opacity:1}
+.scrolly-text{display:flex;flex-direction:column}
+.scrolly-step{padding:72px 0;min-height:50vh;display:flex;flex-direction:column;justify-content:center;opacity:.3;transition:opacity .5s ease}
+.scrolly-step.active{opacity:1}
+.scrolly-step .s-num{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.scrolly-step .s-head{font-size:clamp(24px,3.5vw,40px);font-weight:500;letter-spacing:-.02em;line-height:1.08;margin-top:10px}
+.scrolly-step .s-body{color:var(--muted);font-size:15px;line-height:1.55;margin-top:14px;max-width:380px}
+@media(max-width:720px){.scrolly-steps{grid-template-columns:1fr}.scrolly-visual{position:relative;top:0;height:240px;order:-1}.scrolly-step{min-height:auto;padding:40px 0;opacity:1}}
+/* UX makeover slider */
+.makeover{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);user-select:none;touch-action:none}
+.makeover-inner{position:relative;width:100%;aspect-ratio:16/9;max-height:70vh}
+.makeover-before,.makeover-after{position:absolute;inset:0}
+.makeover-before img,.makeover-after img{width:100%;height:100%;object-fit:cover;display:block}
+.makeover-before img{filter:grayscale(1)}
+.makeover-after{clip-path:inset(0 0 0 50%)}
+.makeover-after img{filter:grayscale(0)}
+.makeover-handle{position:absolute;top:0;bottom:0;width:60px;left:50%;transform:translateX(-50%);cursor:ew-resize;z-index:2;display:flex;align-items:center;justify-content:center}
+.makeover-handle .m-line{width:2px;height:100%;background:var(--fg);opacity:.8}
+.makeover-handle .m-knob{position:absolute;width:44px;height:44px;border-radius:50%;background:var(--bg);border:2px solid var(--fg);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--fg);letter-spacing:.1em;font-weight:500}
+.makeover-label{padding:28px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1120px;margin:0 auto}
+.makeover-label .ml-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.makeover-label .ml-desc{font-size:15px;color:var(--muted)}
+@media(max-width:720px){.makeover-handle{width:44px}.makeover-handle .m-knob{width:36px;height:36px;font-size:10px}}
+/* interactive upgrades */
+@media(pointer:fine){.cap-tilt{transition:transform .4s cubic-bezier(.23,1,.32,1)}}
+.g-img{transition:transform .5s cubic-bezier(.23,1,.32,1)}
+.g-img:hover{transform:scale(1.03)}
+.stat-shimmer{position:relative;overflow:hidden}
+.stat-shimmer::after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);transform:translateX(-100%)}
+[data-theme="light"] .stat-shimmer::after{background:linear-gradient(90deg,transparent,rgba(0,0,0,.04),transparent)}
+@keyframes shimmer{to{transform:translateX(250%)}}
+.stat-shimmer.shimmer-flash::after{animation:shimmer .6s ease forwards}
+@media(prefers-reduced-motion:reduce){.cap-tilt{transition:none!important}.g-img:hover{transform:none}.stat-shimmer::after{display:none}}
 </style>
 </head>
 <body>
@@ -259,6 +298,7 @@ footer{position:relative;z-index:1}
 <div class="work-item reveal" data-modal="cadence" data-thumb="https://picsum.photos/seed/cadence/440/300"><span class="idx">03</span><span class="name">Cadence</span><span class="kind">Health &middot; iOS</span><span class="go">→</span></div>
 <div class="work-item reveal" data-modal="northwind" data-thumb="https://picsum.photos/seed/northwind/440/300"><span class="idx">04</span><span class="name">Northwind</span><span class="kind">Logistics</span><span class="go">→</span></div>
 </div></div></section>
+<section class="scrolly" id="scrolly"><div class="scrolly-bar" id="scrollyBar"></div><div class="scrolly-steps"><div class="scrolly-visual"><img src="https://picsum.photos/seed/scrolly1/800/600" alt="" class="active" data-step="0" /><img src="https://picsum.photos/seed/scrolly2/800/600" alt="" data-step="1" /><img src="https://picsum.photos/seed/scrolly3/800/600" alt="" data-step="2" /><img src="https://picsum.photos/seed/scrolly4/800/600" alt="" data-step="3" /></div><div class="scrolly-text"><div class="scrolly-step active" data-step="0"><span class="s-num">01 / problem</span><h3 class="s-head">A logistics platform stuck in 2003.</h3><p class="s-body">Desktop-only, no API, dispatchers printing screenshots to share status. Forty trucks and a clipboard workflow that could not scale past fifty.</p></div><div class="scrolly-step" data-step="1"><span class="s-num">02 / approach</span><h3 class="s-head">Embed with the dispatchers for two weeks.</h3><p class="s-body">Our engineers rode along. Learned the real workflow, not the documented one. The dispatchers had built shortcuts the original software never accounted for.</p></div><div class="scrolly-step" data-step="2"><span class="s-num">03 / build</span><h3 class="s-head">A web app drivers can use from a phone.</h3><p class="s-body">Real-time dispatch dashboard, driver mobile app, automated status updates. Same data, same workflows, zero retraining. Replaced the old system in one cutover.</p></div><div class="scrolly-step" data-step="3"><span class="s-num">04 / result</span><h3 class="s-head">50 to 200 trucks in six months.</h3><p class="s-body">Dispatch time down 60%. Driver status visible in real time. The platform now handles 200 trucks with the same three dispatchers who were there at 50.</p></div></div></div></section>
 <section class="three-sec" id="threeSec"><canvas id="three-canvas"></canvas><div class="wrap"><div class="quote reveal"><span class="q-mark">&ldquo;</span><blockquote>The Greeks had two words for it ,  theoria, the knowing, and praxis, the doing. Most consultancies sell the first. We ship the second.</blockquote><cite>,  Praxis founding principle</cite></div></div></section>
 <section id="process"><div class="wrap sec"><div class="sec-head reveal"><h2>How we work</h2><p>We embed with your team, understand the problem from the inside, and ship working software. No handoffs, no big reveals ,  just steady progress until it is in your users' hands.</p></div>
 <div class="process-grid">
@@ -271,6 +311,7 @@ footer{position:relative;z-index:1}
 <p class="reveal">We are software engineers who design, and designers who code. Companies hire us to build internal tools, operational platforms, and the kind of software their teams use every day. Same people from kickoff to deploy.</p>
 <div class="caps"><div class="cap reveal"><div class="n greek">01 / θεωρία</div><div class="t">Product &amp; strategy</div></div><div class="cap reveal"><div class="n greek">02 / πρᾶξις</div><div class="t">Design &amp; engineering</div></div><div class="cap reveal"><div class="n">03 / systems</div><div class="t">Design systems</div></div><div class="cap reveal"><div class="n">04 / care</div><div class="t">Long-term support</div></div></div>
 </div></div></div></section>
+<section class="makeover" id="makeover"><div class="makeover-inner"><div class="makeover-before"><img src="https://picsum.photos/seed/ux-before/1200/675" alt="Before redesign" /></div><div class="makeover-after" id="makeoverAfter" style="clip-path:inset(0 0 0 50%)"><img src="https://picsum.photos/seed/ux-after/1200/675" alt="After redesign" /></div><div class="makeover-handle" id="makeoverHandle"><div class="m-line"></div><div class="m-knob">⟷</div></div></div><div class="makeover-label"><span class="ml-tag">UX Makeover</span><span class="ml-desc">Before and after. Drag the handle to compare.</span></div></section>
 <div class="gallery-strip"><img class="g-img reveal" src="https://picsum.photos/seed/g1/800/600" alt="" loading="lazy" /><img class="g-img reveal" src="https://picsum.photos/seed/g2/800/600" alt="" loading="lazy" /><img class="g-img reveal" src="https://picsum.photos/seed/g3/800/600" alt="" loading="lazy" /><img class="g-img reveal" src="https://picsum.photos/seed/g4/800/600" alt="" loading="lazy" /><img class="g-img reveal" src="https://picsum.photos/seed/g5/800/600" alt="" loading="lazy" /><img class="g-img reveal" src="https://picsum.photos/seed/g6/800/600" alt="" loading="lazy" /></div>
 <section id="contact"><div class="wrap sec"><div class="contact-grid"><h2 class="label reveal" style="padding-top:8px">Contact</h2><div class="contact-body">
 <h3 class="reveal">Have something<br />worth building?<br /><a href="mailto:studio@praxis.studio">studio@praxis.studio</a></h3>
@@ -405,6 +446,18 @@ if (!reduce) {
   wm.addEventListener('mouseleave', () => chars.forEach(ch => ch.style.transform = ''));
 }
 
+/* ---- capability cards tilt ---- */
+if (!reduce && matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.cap').forEach(cap => {
+    cap.classList.add('cap-tilt');
+    cap.addEventListener('mousemove', e => {
+      const r = cap.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      cap.style.transform = `perspective(600px) rotateY(${x*8}deg) rotateX(${-y*8}deg)`;
+    });
+    cap.addEventListener('mouseleave', () => cap.style.transform = '');
+  });
+}
+
 /* ---- reveal on scroll ---- */
 if (reduce) {
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
@@ -413,6 +466,33 @@ if (reduce) {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ---- scrollytelling case study ---- */
+if (!reduce) {
+  const scrolly = document.getElementById('scrolly');
+  if (scrolly) {
+    const sSteps = scrolly.querySelectorAll('.scrolly-step');
+    const sImgs = scrolly.querySelectorAll('.scrolly-visual img');
+    const sBar = document.getElementById('scrollyBar');
+    const sObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const step = e.target.dataset.step;
+        sSteps.forEach(s => s.classList.remove('active'));
+        sImgs.forEach(i => i.classList.remove('active'));
+        e.target.classList.add('active');
+        const img = scrolly.querySelector('.scrolly-visual img[data-step="' + step + '"]');
+        if (img) img.classList.add('active');
+      });
+    }, { threshold: 0.5 });
+    sSteps.forEach(s => sObs.observe(s));
+    addEventListener('scroll', () => {
+      const r = scrolly.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, -r.top / (r.height - innerHeight)));
+      if (sBar) sBar.style.height = (p * 100) + '%';
+    }, { passive: true });
+  }
 }
 
 /* ---- count-up stats ---- */
@@ -427,6 +507,21 @@ const statObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.6 });
 document.querySelectorAll('.num[data-count]').forEach(el => statObs.observe(el));
+
+/* ---- stats shimmer ---- */
+if (!reduce) {
+  const shObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      shObs.unobserve(e.target);
+      e.target.querySelectorAll('.stat').forEach((st, i) => {
+        setTimeout(() => st.classList.add('shimmer-flash'), 1600 + i * 100);
+      });
+    });
+  });
+  const statsRow = document.querySelector('.stats');
+  if (statsRow) { statsRow.querySelectorAll('.stat').forEach(s => s.classList.add('stat-shimmer')); shObs.observe(statsRow); }
+}
 
 /* ---- work thumbnail follows cursor ---- */
 const thumb = document.getElementById('thumb');
@@ -464,6 +559,35 @@ document.querySelectorAll('dialog.modal').forEach(dialog => {
     dialog.style.opacity = ''; dialog.style.transform = '';
   });
 });
+
+/* ---- UX makeover slider ---- */
+if (!reduce) {
+  const mHandle = document.getElementById('makeoverHandle');
+  const mAfter = document.getElementById('makeoverAfter');
+  if (mHandle && mAfter) {
+    let dragging = false, mPct = 50;
+    mHandle.addEventListener('pointerdown', e => { dragging = true; mHandle.setPointerCapture(e.pointerId); });
+    addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const r = mAfter.parentElement.getBoundingClientRect();
+      mPct = Math.max(5, Math.min(95, ((e.clientX - r.left) / r.width) * 100));
+      mAfter.style.clipPath = 'inset(0 0 0 ' + mPct + '%)';
+      mHandle.style.left = mPct + '%';
+    });
+    addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false;
+      const cur = parseFloat(mHandle.style.left) || 50;
+      const snap = Math.round(cur / 25) * 25;
+      mPct = Math.max(5, Math.min(95, snap));
+      mHandle.style.transition = 'left .4s cubic-bezier(.23,1,.32,1)';
+      mAfter.style.transition = 'clip-path .4s cubic-bezier(.23,1,.32,1)';
+      mHandle.style.left = mPct + '%';
+      mAfter.style.clipPath = 'inset(0 0 0 ' + mPct + '%)';
+      setTimeout(() => { mHandle.style.transition = ''; mAfter.style.transition = ''; }, 400);
+    });
+  }
+}
 
 /* ---- cookie consent ---- */
 const KEY = 'praxis-consent', ck = document.getElementById('cookie');
