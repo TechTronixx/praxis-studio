@@ -1,5 +1,9 @@
 # Praxis Studio
 
+![Stars](https://img.shields.io/github/stars/TechTronixx/praxis-studio)
+![Last commit](https://img.shields.io/github/last-commit/TechTronixx/praxis-studio)
+![License](https://img.shields.io/github/license/TechTronixx/praxis-studio)
+
 Landing page for Praxis, a software engineering studio. Companies hire us to build internal tools, platforms, and the kind of software their teams use every day.
 
 Single HTML file. No build step, no dependencies beyond CDN imports (DM Sans, anime.js, Three.js).
